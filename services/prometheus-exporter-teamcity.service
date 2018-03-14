@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus Teamcity Exporter
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User=sysadmin
+Group=sysadmin
+ExecStart=/opt/dashboard/.pyenv/bin/python2 -B /opt/dashboard/exporter_teamcity.py --conf=/opt/dashboard/exporter_teamcity.cfg --port=9393 --log-level=INFO
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=prometheus-exporter-teamcity
+
+[Install]
+WantedBy=multi-user.target

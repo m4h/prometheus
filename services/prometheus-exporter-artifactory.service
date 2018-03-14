@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus Exporter Artifactory
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User=sysadmin
+Group=sysadmin
+ExecStart=/opt/dashboard/.pyenv/bin/python2 -B /opt/dashboard/exporter_artifactory.py --conf=/opt/dashboard/exporter_artifactory.cfg --port=9292 --log-level=INFO
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=prometheus-exporter-artifactory
+
+[Install]
+WantedBy=multi-user.target

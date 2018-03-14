@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus Node Network Exporter
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User=sysadmin
+Group=sysadmin
+ExecStart=/opt/dashboard/.pyenv/bin/python2 -B /opt/dashboard/exporter_node_network.py --conf=/opt/dashboard/exporter_node_network.cfg --port=9494 --log-level=INFO
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=prometheus-exporter-node-network
+
+[Install]
+WantedBy=multi-user.target
